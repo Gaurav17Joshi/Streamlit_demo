@@ -62,9 +62,9 @@ plot_time_series(data)
 plot_acf_pacf(data, lag)
 
 # Add sliders for ARIMA model parameters
-p = st.sidebar.slider('Select p value', min_value=0, max_value=10)
-d = st.sidebar.slider('Select d value', min_value=0, max_value=10)
-q = st.sidebar.slider('Select q value', min_value=0, max_value=10)
+p = st.sidebar.slider('Select p value (lag order)', min_value=0, max_value=10)
+d = st.sidebar.slider('Select d value (degree of differencing)', min_value=0, max_value=10)
+q = st.sidebar.slider('Select q value (moving average wimdow sie)', min_value=0, max_value=10)
 
 # Train ARIMA model and make predictions
 forecast = train_arima(data, p, d, q)
