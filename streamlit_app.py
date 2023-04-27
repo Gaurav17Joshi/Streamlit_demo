@@ -29,12 +29,12 @@ def plot_acf_pacf(data, lag):
     st.pyplot(fig)
 
 # Function to train ARIMA model and make predictions
-def train_arima(data, p, d, q):
+def train_arima(data, p, d, q, steps = 1):
     model = ARIMA(data, order=(p, d, q))
     model_fit = model.fit()
     # print(model_fit.forecast(steps=1))
     # forecast = model_fit.forecast(steps=1)[0]
-    forecast = model_fit.forecast(steps=1)
+    forecast = model_fit.forecast(steps)
     return forecast
 
 # Set up the app
@@ -65,9 +65,10 @@ plot_acf_pacf(data, lag)
 p = st.sidebar.slider('Select p value (lag order)', min_value=0, max_value=10)
 d = st.sidebar.slider('Select d value (degree of differencing)', min_value=0, max_value=10)
 q = st.sidebar.slider('Select q value (moving average wimdow sie)', min_value=0, max_value=10)
+steps = st.sidebar.slider('Select number of steps to forecast', min_value=1, max_value=5)
 
 # Train ARIMA model and make predictions
-forecast = train_arima(data, p, d, q)
+forecast = train_arima(data, p, d, q, steps)
 
 # Display forecasted value
 st.write('The forecasted value for the next time step is:', forecast)
